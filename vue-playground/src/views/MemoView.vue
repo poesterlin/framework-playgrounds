@@ -29,7 +29,8 @@ function startSpinner() {
     <h1>Function View</h1>
     <p>This view uses a function to run an expensive operation.</p>
     <div class="spinner" :style="{ '--spinner-position': `${spinnerPosition}%` }"> </div>
-    <pre>
+
+    <pre v-memo="[]">
       {{ new Array(1000000).fill(0).map((_, i) => Math.sqrt(i)).map((n) => n * n).map(String).reduce(() => "done") }}
     </pre>
 

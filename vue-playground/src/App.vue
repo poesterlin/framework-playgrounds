@@ -8,6 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav>
         <RouterLink to="/function">Using Functions</RouterLink>
         <RouterLink to="/inline">Using Inline Code</RouterLink>
+        <RouterLink to="/memo">Using Memoization</RouterLink>
         <RouterLink to="/component">Using separate component</RouterLink>
       </nav>
     </div>

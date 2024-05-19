@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/component',
       name: 'component',
       component: () => import('@views/ComponentView.vue')
+    },
+    {
+      path: "/memo",
+      name: "memo",
+      component: () => import("@views/MemoView.vue")
     }
   ]
 })
