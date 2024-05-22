@@ -1,5 +1,5 @@
 <script setup>
-import { onDeactivated, onMounted, ref } from 'vue';
+import { onDeactivated, ref } from 'vue';
 
 const spinnerPosition = ref(0);
 let abort = false;
@@ -11,32 +11,29 @@ const updateSpinner = () => {
   requestAnimationFrame(updateSpinner);
 };
 
-const increment = () => {
-  spinnerPosition.value = (spinnerPosition.value + 10) % 100;
-};
-
 onDeactivated(() => {
   abort = true;
 });
 
-function startSpinner() {
-  updateSpinner();
-}
 </script>
 
 <template>
   <main>
-    <h1>Function View</h1>
-    <p>This view uses a function to run an expensive operation.</p>
+    <h1>Inline Executed Code Using 'v-memo' directive</h1>
+    <p>This view uses the same inlined code with the <a href="https://vuejs.org/api/built-in-directives.html#v-memo"
+        target="_blank">v-memo</a> directive</p>
     <div class="spinner" :style="{ '--spinner-position': `${spinnerPosition}%` }"> </div>
 
+    <pre v-pre>
+      &lt;div v-memo="[]">
+        {{ new Array(3000000).fill(0).map((_, i) => Math.sqrt(i)).map((n) => n * n).map(String).reduce(() => "done") }}
+      &lt;/div>
+    </pre>
     <pre v-memo="[]">
-      {{ new Array(1000000).fill(0).map((_, i) => Math.sqrt(i)).map((n) => n * n).map(String).reduce(() => "done") }}
+      => {{ new Array(3000000).fill(0).map((_, i) => Math.sqrt(i)).map((n) => n * n).map(String).reduce(() => "done") }}
     </pre>
 
-    <button @click="increment">Increment</button>
-
-    <button @click="startSpinner">Start Spinner</button>
+    <button @click="updateSpinner">Start Spinner</button>
 
   </main>
 </template>

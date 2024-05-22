@@ -8,6 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav>
         <RouterLink to="/function">Using Functions</RouterLink>
         <RouterLink to="/inline">Using Inline Code</RouterLink>
+        <RouterLink to="/once">Using Once Directive</RouterLink>
         <RouterLink to="/memo">Using Memoization</RouterLink>
         <RouterLink to="/component">Using separate component</RouterLink>
       </nav>
@@ -17,13 +18,18 @@ import { RouterLink, RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style >
+<style>
+body {
+  font-family: Arial, sans-serif;
+
+}
+
 nav {
   display: flex;
   gap: 1rem;
 }
 
-a {
+nav a {
   color: #333;
   text-decoration: none;
 

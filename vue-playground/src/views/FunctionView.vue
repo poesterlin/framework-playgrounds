@@ -11,33 +11,24 @@ const updateSpinner = () => {
   requestAnimationFrame(updateSpinner);
 };
 
-const increment = () => {
-  spinnerPosition.value = (spinnerPosition.value + 10) % 100;
-};
-
 onDeactivated(() => {
   abort = true;
 });
 
-function startSpinner() {
-  updateSpinner();
-}
-
 function expensiveToRunFunction() {
-  return new Array(1000000).fill(0).map((_, i) => Math.sqrt(i)).map((n) => n * n).map(String).reduce(() => "done");
+  return new Array(3000000).fill(0).map((_, i) => Math.sqrt(i)).map((n) => n * n).map(String).reduce(() => "done");
 }
 </script>
 
 <template>
   <main>
-    <h1>Function View</h1>
+    <h1>Heavy Code in Function</h1>
     <p>This view uses a function to run an expensive operation.</p>
     <div class="spinner" :style="{ '--spinner-position': `${spinnerPosition}%` }"> </div>
 
-    <!-- <pre> {{ expensiveToRunFunction() }} </pre> -->
+    <pre v-pre> {{ expensiveToRunFunction() }} </pre>
+    <pre> => {{ expensiveToRunFunction() }} </pre>
 
-    <button @click="increment">Increment</button>
-    <button @click="startSpinner">Start Spinner</button>
-    <button @click="expensiveToRunFunction">Run Expensive Function </button>
+    <button @click="updateSpinner">Start Spinner</button>
   </main>
 </template>

@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted, onDeactivated } from 'vue';
+import { ref, onDeactivated } from 'vue';
 
 const spinnerPosition = ref(0);
 let abort = false;
 
-onMounted(() => {
-    const updateSpinner = () => {
-        spinnerPosition.value = (spinnerPosition.value + 1) % 100;
-        if (abort) return;
+const updateSpinner = () => {
+    spinnerPosition.value = (spinnerPosition.value + 1) % 100;
+    if (abort) return;
 
-        requestAnimationFrame(updateSpinner);
-    };
-
-    updateSpinner();
-});
+    requestAnimationFrame(updateSpinner);
+};
 
 onDeactivated(() => {
     abort = true;
@@ -21,5 +17,8 @@ onDeactivated(() => {
 </script>
 
 <template>
-    <div class="spinner" :style="{ '--spinner-position': `${spinnerPosition}%` }"> </div>
+    <div style="border: 1px solid black">
+        <div class="spinner" :style="{ '--spinner-position': `${spinnerPosition}%` }"> </div>
+        <button @click="updateSpinner">Start Spinner</button>
+    </div>
 </template>
