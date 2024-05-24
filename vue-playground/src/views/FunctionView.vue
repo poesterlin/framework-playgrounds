@@ -5,9 +5,11 @@ const spinnerPosition = ref(0);
 let abort = false;
 
 const updateSpinner = () => {
+  console.timeEnd('updateSpinner');
   spinnerPosition.value = (spinnerPosition.value + 1) % 100;
   if (abort) return;
 
+  console.time('updateSpinner');
   requestAnimationFrame(updateSpinner);
 };
 

@@ -4,10 +4,13 @@
 
 	let spinnerPosition = 0;
 	let abort = false;
+	let iterations = 0;
 
 	onMount(() => {
 		const updateSpinner = () => {
 			spinnerPosition = (spinnerPosition + 1) % 100;
+			// iterations++;
+
 			if (abort) return;
 
 			requestAnimationFrame(updateSpinner);
@@ -19,20 +22,9 @@
 	onDestroy(() => {
 		abort = true;
 	});
-
-	function expensiveToRunFunction() {
-		return new Array(3000000)
-			.fill(0)
-			.map((_, i) => Math.sqrt(i))
-			.map((n) => n * n)
-			.map(String)
-			.reduce(() => 'done');
-	}
 </script>
 
 <main>
-	<h1>Function View</h1>
-	<p>This view uses a function to run an expensive operation.</p>
 	<p>Current spinner position: {spinnerPosition}</p>
 	<div class="spinner" style:--spinner-position="{spinnerPosition}%"></div>
 
@@ -50,7 +42,7 @@
 			}}
 		`}
 
-			{new Array(3000000)
+			{new Array(3000000 + iterations)
 				.fill(0)
 				.map((_, i) => Math.sqrt(i))
 				.map((n) => n * n)
@@ -58,7 +50,6 @@
 				.reduce(() => 'done')}
 		</p>
 	{/if}
-	<button on:click={expensiveToRunFunction}>Run Expensive Function </button>
 </main>
 
 <style>
